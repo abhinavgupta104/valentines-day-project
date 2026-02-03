@@ -1,12 +1,15 @@
 body {
-    background-color: white;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #ffe6fa, #ffc0cb, #f8bbd0, #e1bee7);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Nunito', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .buttons {
@@ -20,13 +23,15 @@ body {
 
 #no-button {
     margin: 0 10px;
-    color: white;
-    background-color: red;
+    color: #ff4081;
+    background-color: #ffebee;
+    border: 2px solid #ff4081;
     height: 40px !important;
     width: auto;
-    border: none;
     cursor: pointer;
     margin-top: 10px;
+    border-radius: 50px;
+    font-weight: 700;
 
     p {
         margin: 0;
@@ -38,9 +43,12 @@ body {
     margin: 0 10px;
     color: white;
     border: none;
-    background-color: green;
+    background-color: #ff4081;
     cursor: pointer;
     height: 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
 
     p {
         margin: 0;
@@ -60,9 +68,19 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 0;
+    padding: 40px;
     text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+#question-heading {
+    font-family: 'Pacifico', cursive;
+    color: #d81b60;
+    font-size: 2rem;
 }
 
 .message {
@@ -75,15 +93,18 @@ body {
     margin-top: 20px;
 
     img {
-        width: auto;
-        height: 250px;
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        object-fit: cover;
     }
 }
 
 .language-selector {
     margin-top: 30px;
     position: unset;
-    font-family: Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -98,6 +119,7 @@ body {
 .language-selector select {
     padding: 5px;
     border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 16px;
 }
 
@@ -121,11 +143,228 @@ body {
     .language-selector {
         position: unset;
         margin-top: 30px;
-        font-family: Arial, sans-serif;
+        font-family: 'Nunito', sans-serif;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         width: 100%;
+    }
+}
+
+/* Floating Hearts Animation */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.floating-hearts span {
+    position: absolute;
+    bottom: -50px;
+    display: block;
+    font-size: 30px;
+    animation: floatUp 15s linear infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -50px;
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+.floating-hearts span:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+.floating-hearts span:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 2s; font-size: 40px; }
+.floating-hearts span:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
+.floating-hearts span:nth-child(4) { left: 40%; animation-duration: 18s; animation-delay: 1s; font-size: 35px; }
+.floating-hearts span:nth-child(5) { left: 50%; animation-duration: 14s; animation-delay: 3s; }
+.floating-hearts span:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; font-size: 45px; }
+.floating-hearts span:nth-child(7) { left: 70%; animation-duration: 16s; animation-delay: 2s; }
+.floating-hearts span:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: 4s; font-size: 25px; }
+.floating-hearts span:nth-child(9) { left: 90%; animation-duration: 17s; animation-delay: 1s; }
+.floating-hearts span:nth-child(10) { left: 5%; animation-duration: 19s; animation-delay: 6s; font-size: 50px; }
+.floating-hearts span:nth-child(11) { left: 15%; animation-duration: 12s; animation-delay: 7s; }
+.floating-hearts span:nth-child(12) { left: 25%; animation-duration: 15s; animation-delay: 8s; font-size: 30px; }
+.floating-hearts span:nth-child(13) { left: 35%; animation-duration: 10s; animation-delay: 9s; }
+.floating-hearts span:nth-child(14) { left: 45%; animation-duration: 18s; animation-delay: 5s; font-size: 40px; }
+.floating-hearts span:nth-child(15) { left: 55%; animation-duration: 14s; animation-delay: 2s; }
+
+/* Carousel Styles */
+#carousel {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#carousel img {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    height: 100%;
+    width: auto;
+}
+
+#carousel img.active {
+    opacity: 1;
+}
+
+/* Vertical Carousel Belts */
+.carousel-belt {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    overflow: hidden;
+    z-index: -2; /* Behind hearts and main content */
+}
+
+.left-belt {
+    left: 30px;
+}
+
+.right-belt {
+    right: 30px;
+}
+
+.belt-track {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    animation: scrollVertical 20s linear infinite;
+}
+
+.carousel-belt:hover .belt-track {
+    animation-play-state: paused;
+}
+
+.right-belt .belt-track {
+    animation-direction: reverse;
+}
+
+.belt-track img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity: 0.9;
+}
+
+.left-belt .belt-track img {
+    transform: rotate(-5deg);
+}
+
+.right-belt .belt-track img {
+    transform: rotate(5deg);
+}
+
+@keyframes scrollVertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+@media (max-width: 1024px) {
+    .carousel-belt {
+        width: 60px;
+    }
+    .left-belt {
+        left: 0;
+    }
+    .right-belt {
+        right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 85%;
+    }
+    .banner-gif img {
+        height: 250px;
+    }
+    #carousel {
+        height: 250px;
+    }
+
+    /* Horizontal Carousel Belts for Mobile */
+    .carousel-belt {
+        width: 100%;
+        height: 140px;
+        left: 0;
+        right: 0;
+    }
+
+    .left-belt {
+        top: 0;
+        bottom: auto;
+    }
+
+    .right-belt {
+        top: auto;
+        bottom: 0;
+    }
+
+    .belt-track {
+        flex-direction: row;
+        width: max-content;
+        height: 100%;
+        animation-name: scrollHorizontal;
+    }
+
+    .belt-track img {
+        height: 100%;
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 10px;
+        transform: rotate(0deg) !important;
+    }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes scrollHorizontal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Sparkle Effect */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: sparkleFade 1s linear forwards;
+}
+
+@keyframes sparkleFade {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) translateY(20px);
+        opacity: 0;
     }
 }

@@ -18,13 +18,13 @@ const answers_no = {
     ],
     french: [
         "Non",
-        "Tu es sûr ?",
+        "Tu es sûr ?",
         "Tu es vraiment sûr ??",
         "Tu es vraiment vraiment sûr ???",
         "Réfléchis encore?",
-        "Tu ne crois pas aux deuxièmes chances ?",
+        "Tu ne crois pas aux deuxièmes chances ?",
         "Pourquoi tu es si froid?",
-        "Peut-être, on peut en parler ?",
+        "Peut-être, on peut en parler ?",
         "Je ne vais pas demander encore une fois!",
         "D'accord, maintenant ca me fait mal!",
         "Tu es juste méchant!",
@@ -44,7 +44,7 @@ const answers_no = {
         "ขอร้องนะคะ",
         "น้าาาๆๆๆๆๆ",
         "เราจะร้องไห้เอานะ กระซิกๆ",
-        "จะเอางี้ๆจริงหรอคะ",
+        "จะเอังี้ๆจริงหรอคะ",
         "ฮือออออ",
         "ขอโอกาศครั้งที่สองที่ค่ะ!",
         "ขอร้องละค่าาา",
@@ -64,6 +64,9 @@ const yes_button = document.getElementById('yes-button');
 let i = 1;
 let size = 50;
 let clicks = 0;
+
+// Get the audio element
+const music = document.getElementById('background-music');
 
 no_button.addEventListener('click', () => {
     // Change banner source
@@ -93,6 +96,10 @@ no_button.addEventListener('click', () => {
         yes_button.style.width = "50px";
         size = 50;
     }
+        // Play the music when they say NO! 🎵
+    music.play().catch(error => {
+        console.log('Could not play music:', error);
+    });
 });
 
 yes_button.addEventListener('click', () => {
@@ -106,6 +113,38 @@ yes_button.addEventListener('click', () => {
     // show message div
     let message = document.getElementsByClassName('message')[0];
     message.style.display = "block";
+    
+    // Trigger confetti explosion
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: 150,
+            spread: 60,
+            origin: { y: 0.6 }
+        });
+    }
+
+    // Play the music when they say YES! 🎵
+    music.play().catch(error => {
+        console.log('Could not play music:', error);
+    });
+});
+
+no_button.addEventListener('mouseover', () => {
+    const i = Math.floor(Math.random() * (window.innerWidth - no_button.offsetWidth));
+    const j = Math.floor(Math.random() * (window.innerHeight - no_button.offsetHeight));
+    no_button.style.position = "absolute";
+    no_button.style.left = i + "px";
+    no_button.style.top = j + "px";
+});
+
+// Mobile support for 'No' button running away
+no_button.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const i = Math.floor(Math.random() * (window.innerWidth - no_button.offsetWidth));
+    const j = Math.floor(Math.random() * (window.innerHeight - no_button.offsetHeight));
+    no_button.style.position = "absolute";
+    no_button.style.left = i + "px";
+    no_button.style.top = j + "px";
 });
 
 function refreshBanner() {
@@ -151,3 +190,73 @@ function changeLanguage() {
         successMessage.textContent = "Yepppie, see you sooonnn :3";
     }
 }
+
+// Sparkle effect following mouse cursor
+document.addEventListener('mousemove', (e) => {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    
+    // Add some randomness to position
+    const offsetX = (Math.random() - 0.5) * 20;
+    const offsetY = (Math.random() - 0.5) * 20;
+    
+    sparkle.style.left = (e.pageX + offsetX) + 'px';
+    sparkle.style.top = (e.pageY + offsetY) + 'px';
+    
+    // Random size
+    const size = Math.random() * 8 + 2;
+    sparkle.style.width = size + 'px';
+    sparkle.style.height = size + 'px';
+    
+    // Random colors fitting the theme
+    const colors = ['#ffeb3b', '#ff4081', '#ffffff', '#8bc34a'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    sparkle.style.backgroundColor = color;
+    sparkle.style.boxShadow = `0 0 5px ${color}`;
+    
+    document.body.appendChild(sparkle);
+    
+    // Remove element after animation
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
+});
+
+// Sparkle effect for touch devices
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    
+    // Add some randomness to position
+    const offsetX = (Math.random() - 0.5) * 20;
+    const offsetY = (Math.random() - 0.5) * 20;
+    
+    sparkle.style.left = (touch.pageX + offsetX) + 'px';
+    sparkle.style.top = (touch.pageY + offsetY) + 'px';
+    
+    // Random size
+    const size = Math.random() * 8 + 2;
+    sparkle.style.width = size + 'px';
+    sparkle.style.height = size + 'px';
+    
+    // Random colors fitting the theme
+    const colors = ['#ffeb3b', '#ff4081', '#ffffff', '#8bc34a'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    sparkle.style.backgroundColor = color;
+    sparkle.style.boxShadow = `0 0 5px ${color}`;
+    
+    document.body.appendChild(sparkle);
+    
+    // Remove element after animation
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
+});
+
+// Ensure music plays on mobile interaction (tap anywhere)
+document.body.addEventListener('touchstart', function() {
+    if (music.paused) {
+        music.play().catch(() => {});
+    }
+}, { once: true });
