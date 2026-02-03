@@ -129,22 +129,62 @@ yes_button.addEventListener('click', () => {
     });
 });
 
-no_button.addEventListener('mouseover', () => {
-    const i = Math.floor(Math.random() * (window.innerWidth - no_button.offsetWidth));
-    const j = Math.floor(Math.random() * (window.innerHeight - no_button.offsetHeight));
+const moveButton = () => {
+    // Confetti at old position
+    const rect = no_button.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    
+    // Optimize for mobile
+    const isMobile = window.innerWidth < 768;
+
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: isMobile ? 10 : 20, // Reduce particles on mobile
+            spread: 360,
+            startVelocity: 15,
+            origin: { x: x, y: y },
+            colors: ['#ff4081', '#f44336', '#4caf50', '#2196f3', '#9c27b0'],
+            scalar: 0.5,
+            disableForReducedMotion: true,
+            ticks: 50
+        });
+    }
+
+    // Add safe margin so button doesn't hit edges
+    const margin = 20;
+    const maxWidth = window.innerWidth - no_button.offsetWidth - margin;
+    const maxHeight = window.innerHeight - no_button.offsetHeight - margin;
+    const i = Math.floor(Math.random() * maxWidth) + margin / 2;
+    const j = Math.floor(Math.random() * maxHeight) + margin / 2;
+
     no_button.style.position = "absolute";
     no_button.style.left = i + "px";
     no_button.style.top = j + "px";
-});
+
+    const rotation = (Math.random() * 720) - 360;
+    const scale = 0.8 + Math.random() * 0.4;
+    no_button.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+
+    // Make it look chaotic
+    const colors = ['#ff4081', '#f44336', '#4caf50', '#2196f3', '#9c27b0'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    no_button.style.backgroundColor = randomColor;
+    no_button.style.color = '#fff';
+    no_button.style.borderColor = randomColor;
+    no_button.style.boxShadow = `0 0 15px ${randomColor}`;
+    
+    // Cute taunts
+    const taunts = ["Catch me! 🏃‍♂️", "Too slow! 😝", "Nope! 👻", "Try again! 💖", "Missed! 🙈", "Can't touch this! 💃", "Not today! 🤪"];
+    no_button.innerText = taunts[Math.floor(Math.random() * taunts.length)];
+};
+
+no_button.addEventListener('mouseover', moveButton);
 
 // Mobile support for 'No' button running away
 no_button.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    const i = Math.floor(Math.random() * (window.innerWidth - no_button.offsetWidth));
-    const j = Math.floor(Math.random() * (window.innerHeight - no_button.offsetHeight));
-    no_button.style.position = "absolute";
-    no_button.style.left = i + "px";
-    no_button.style.top = j + "px";
+    moveButton();
 });
 
 function refreshBanner() {
