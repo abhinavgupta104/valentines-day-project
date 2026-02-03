@@ -52,10 +52,10 @@ const answers_no = {
     ]
 };
 
-answers_yes = {
+const answers_yes = {
     "english": "Yes",
     "french": "Oui",
-    "Thailand": "เย่ คืนดีกันแล้วน้า"
+    "thai": "เย่ คืนดีกันแล้วน้า"
 }
 
 let language = "english"; // Default language is English
@@ -174,11 +174,7 @@ function changeLanguage() {
     yes_button.innerHTML = answers_yes[language];
 
     // Reset button text to first in the new language
-    if (clicks === 0) {
-        no_button.innerHTML = answers_no[language][0];
-    } else {
-        no_button.innerHTML = answers_no[language][clicks];
-    }
+    no_button.innerHTML = answers_no[language][i - 1];
 
     // Update success message
     const successMessage = document.getElementById("success-message");

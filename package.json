@@ -1,23 +1,23 @@
 {
   "name": "will-you-be-my-valentine",
   "version": "1.0.0",
-  "description": "- View Live: [Click Here](https://aayush-683.github.io/will-you-be-my-valentine/)",
+  "description": "- View Live: [Click Here](https://abhinavgupta104.github.io/will-you-be-my-valentine/)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aayush-683/will-you-be-my-valentine.git"
+    "url": "git+https://github.com/abhinavgupta104/will-you-be-my-valentine.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Aayush-683/will-you-be-my-valentine/issues"
+    "url": "https://github.com/abhinavgupta104/will-you-be-my-valentine/issues"
   },
-  "homepage": "https://github.com/Aayush-683/will-you-be-my-valentine#readme",
+  "homepage": "https://github.com/abhinavgupta104/will-you-be-my-valentine#readme",
   "dependencies": {
     "serve": "^14.2.5"
   }
