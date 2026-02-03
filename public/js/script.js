@@ -47,7 +47,7 @@ const answers_no = {
         "จะเอังี้ๆจริงหรอคะ",
         "ฮือออออ",
         "ขอโอกาศครั้งที่สองที่ค่ะ!",
-        "ขอร้องละค่าาา",
+        "ขอร้องละค่ааа",
         "โอเคค่ะ.. งั้นเริ่มใหม่ !"
     ]
 };
@@ -58,32 +58,28 @@ const answers_yes = {
     "thai": "เย่ คืนดีกันแล้วน้า"
 }
 
-let language = "english"; // Default language is English
+let language = "english";
 const no_button = document.getElementById('no-button');
 const yes_button = document.getElementById('yes-button');
 let i = 1;
 let size = 50;
 let clicks = 0;
 
-// Get the audio element
 const music = document.getElementById('background-music');
 
 no_button.addEventListener('click', () => {
-    // Change banner source
     let banner = document.getElementById('banner');
     if (clicks === 0) {
-        banner.src = "public/images/no.gif";
+        banner.src = "./public/images/no.gif";
         refreshBanner();
     }
     clicks++;
-    // increase button height and width gradually to 250px
     const sizes = [40, 50, 30, 35, 45]
     const random = Math.floor(Math.random() * sizes.length);
     size += sizes[random]
     yes_button.style.height = `${size}px`;
     yes_button.style.width = `${size}px`;
     let total = answers_no[language].length;
-    // change button text
     if (i < total - 1) {
         no_button.innerHTML = answers_no[language][i];
         i++;
@@ -96,25 +92,20 @@ no_button.addEventListener('click', () => {
         yes_button.style.width = "50px";
         size = 50;
     }
-        // Play the music when they say NO! 🎵
     music.play().catch(error => {
         console.log('Could not play music:', error);
     });
 });
 
 yes_button.addEventListener('click', () => {
-    // change banner gif path
     let banner = document.getElementById('banner');
-    banner.src = "public/images/yes.gif";
+    banner.src = "./public/images/yes.gif";
     refreshBanner();
-    // hide buttons div
     let buttons = document.getElementsByClassName('buttons')[0];
     buttons.style.display = "none";
-    // show message div
     let message = document.getElementsByClassName('message')[0];
     message.style.display = "block";
     
-    // Trigger confetti explosion
     if (typeof confetti === "function") {
         confetti({
             particleCount: 150,
@@ -123,7 +114,6 @@ yes_button.addEventListener('click', () => {
         });
     }
 
-    // Play the music when they say YES! 🎵
     music.play().catch(error => {
         console.log('Could not play music:', error);
     });
@@ -137,7 +127,6 @@ no_button.addEventListener('mouseover', () => {
     no_button.style.top = j + "px";
 });
 
-// Mobile support for 'No' button running away
 no_button.addEventListener('touchstart', (e) => {
     e.preventDefault();
     const i = Math.floor(Math.random() * (window.innerWidth - no_button.offsetWidth));
@@ -148,7 +137,6 @@ no_button.addEventListener('touchstart', (e) => {
 });
 
 function refreshBanner() {
-    // Reload banner gif to force load  
     let banner = document.getElementById('banner');
     let src = banner.src;
     banner.src = '';
@@ -160,7 +148,6 @@ function changeLanguage() {
     const selectedLanguage = selectElement.value;
     language = selectedLanguage;
 
-    // Update question heading
     const questionHeading = document.getElementById("question-heading");
     if (language === "french") {
         questionHeading.textContent = "Tu veux être mon valentin?";
@@ -170,13 +157,9 @@ function changeLanguage() {
         questionHeading.textContent = "Will you be my valentine?";
     }
 
-    // Reset yes button text
     yes_button.innerHTML = answers_yes[language];
-
-    // Reset button text to first in the new language
     no_button.innerHTML = answers_no[language][i - 1];
 
-    // Update success message
     const successMessage = document.getElementById("success-message");
     if (language === "french") {
         successMessage.textContent = "Yepppie, à bientôt :3";
@@ -187,24 +170,20 @@ function changeLanguage() {
     }
 }
 
-// Sparkle effect following mouse cursor
 document.addEventListener('mousemove', (e) => {
     const sparkle = document.createElement('div');
     sparkle.classList.add('sparkle');
     
-    // Add some randomness to position
     const offsetX = (Math.random() - 0.5) * 20;
     const offsetY = (Math.random() - 0.5) * 20;
     
     sparkle.style.left = (e.pageX + offsetX) + 'px';
     sparkle.style.top = (e.pageY + offsetY) + 'px';
     
-    // Random size
     const size = Math.random() * 8 + 2;
     sparkle.style.width = size + 'px';
     sparkle.style.height = size + 'px';
     
-    // Random colors fitting the theme
     const colors = ['#ffeb3b', '#ff4081', '#ffffff', '#8bc34a'];
     const color = colors[Math.floor(Math.random() * colors.length)];
     sparkle.style.backgroundColor = color;
@@ -212,31 +191,26 @@ document.addEventListener('mousemove', (e) => {
     
     document.body.appendChild(sparkle);
     
-    // Remove element after animation
     setTimeout(() => {
         sparkle.remove();
     }, 1000);
 });
 
-// Sparkle effect for touch devices
 document.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
     const sparkle = document.createElement('div');
     sparkle.classList.add('sparkle');
     
-    // Add some randomness to position
     const offsetX = (Math.random() - 0.5) * 20;
     const offsetY = (Math.random() - 0.5) * 20;
     
     sparkle.style.left = (touch.pageX + offsetX) + 'px';
     sparkle.style.top = (touch.pageY + offsetY) + 'px';
     
-    // Random size
     const size = Math.random() * 8 + 2;
     sparkle.style.width = size + 'px';
     sparkle.style.height = size + 'px';
     
-    // Random colors fitting the theme
     const colors = ['#ffeb3b', '#ff4081', '#ffffff', '#8bc34a'];
     const color = colors[Math.floor(Math.random() * colors.length)];
     sparkle.style.backgroundColor = color;
@@ -244,13 +218,11 @@ document.addEventListener('touchmove', (e) => {
     
     document.body.appendChild(sparkle);
     
-    // Remove element after animation
     setTimeout(() => {
         sparkle.remove();
     }, 1000);
 });
 
-// Ensure music plays on mobile interaction (tap anywhere)
 document.body.addEventListener('touchstart', function() {
     if (music.paused) {
         music.play().catch(() => {});
