@@ -129,7 +129,14 @@ yes_button.addEventListener('click', () => {
     });
 });
 
-const moveButton = () => {
+const moveButton = (e) => {
+    // Play movement sound
+    const moveSound = document.getElementById('move-sound');
+    if (moveSound) {
+        moveSound.currentTime = 0;
+        moveSound.play().catch(() => {});
+    }
+
     // Confetti at old position
     const rect = no_button.getBoundingClientRect();
     const x = (rect.left + rect.width / 2) / window.innerWidth;
@@ -151,16 +158,59 @@ const moveButton = () => {
         });
     }
 
+    // Get mouse/touch position to run away from
+    let mouseX = 0, mouseY = 0;
+    if (e) {
+        if (e.type === 'touchstart') {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        } else {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        }
+    }
+
     // Add safe margin so button doesn't hit edges
-    const margin = 20;
-    const maxWidth = window.innerWidth - no_button.offsetWidth - margin;
-    const maxHeight = window.innerHeight - no_button.offsetHeight - margin;
-    const i = Math.floor(Math.random() * maxWidth) + margin / 2;
-    const j = Math.floor(Math.random() * maxHeight) + margin / 2;
+    const margin = 50;
+    const btnWidth = no_button.offsetWidth;
+    const btnHeight = no_button.offsetHeight;
+    const maxX = window.innerWidth - btnWidth - margin;
+    const maxY = window.innerHeight - btnHeight - margin;
+
+    let targetX, targetY;
+
+    // Smart dodge logic: Move to the opposite quadrant of the mouse
+    if (e && maxX > 0 && maxY > 0) {
+        // X Axis: If mouse is left, go right. If mouse is right, go left.
+        if (mouseX < window.innerWidth / 2) {
+            const minX = window.innerWidth / 2;
+            targetX = minX + Math.random() * (maxX - minX);
+        } else {
+            const maxRange = window.innerWidth / 2 - btnWidth;
+            targetX = margin + Math.random() * (maxRange - margin);
+        }
+        
+        // Y Axis: If mouse is top, go bottom. If mouse is bottom, go top.
+        if (mouseY < window.innerHeight / 2) {
+            const minY = window.innerHeight / 2;
+            targetY = minY + Math.random() * (maxY - minY);
+        } else {
+            const maxRange = window.innerHeight / 2 - btnHeight;
+            targetY = margin + Math.random() * (maxRange - margin);
+        }
+    } else {
+        // Fallback random if no event or screen too small
+        targetX = margin + Math.random() * (maxX - margin);
+        targetY = margin + Math.random() * (maxY - margin);
+    }
+
+    // Clamp values to be safe
+    targetX = Math.min(Math.max(margin, targetX || 0), maxX);
+    targetY = Math.min(Math.max(margin, targetY || 0), maxY);
 
     no_button.style.position = "absolute";
-    no_button.style.left = i + "px";
-    no_button.style.top = j + "px";
+    no_button.style.left = targetX + "px";
+    no_button.style.top = targetY + "px";
 
     const rotation = (Math.random() * 720) - 360;
     const scale = 0.8 + Math.random() * 0.4;
@@ -184,7 +234,7 @@ no_button.addEventListener('mouseover', moveButton);
 // Mobile support for 'No' button running away
 no_button.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    moveButton();
+    moveButton(e);
 });
 
 function refreshBanner() {
@@ -296,3 +346,139 @@ document.body.addEventListener('touchstart', function() {
         music.play().catch(() => {});
     }
 }, { once: true });
+
+// Change page title when user switches tabs
+let originalTitle = document.title;
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        document.title = "Miss you! 💔";
+    } else {
+        document.title = originalTitle;
+    }
+});
+
+// Countdown Timer Logic
+let confettiTriggered = false;
+function updateCountdown() {
+    const timerElement = document.getElementById('timer');
+    if (!timerElement) return;
+
+    const now = new Date();
+    
+    // Check if it is currently Valentine's Day (Month is 0-indexed, so 1 is Feb)
+    if (now.getMonth() === 1 && now.getDate() === 14) {
+        timerElement.innerHTML = "Happy Valentine's Day! 💖";
+        if (!confettiTriggered && typeof confetti === "function") {
+            const rect = timerElement.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { x: x, y: y },
+                colors: ['#ff4081', '#d81b60', '#ffffff']
+            });
+            confettiTriggered = true;
+        }
+        return;
+    }
+    
+    confettiTriggered = false;
+
+    let year = now.getFullYear();
+    let valentinesDay = new Date(year, 1, 14); 
+
+    // If it's already past Valentine's Day this year, count down to next year
+    if (now > valentinesDay) {
+        valentinesDay = new Date(year + 1, 1, 14);
+    }
+
+    const diff = valentinesDay - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Love Quotes Feature
+const loveQuotes = [
+    "You are my sun, my moon, and all my stars. 🌟",
+    "If I know what love is, it is because of you. 💖",
+    "I love you more than words can say. 🌹",
+    "To the world you may be one person, but to me you are the world. 🌍",
+    "Every love story is beautiful, but ours is my favorite. 📖",
+    "You make my heart smile. 😊",
+    "I'm much more me when I'm with you. 🦋",
+    "You are the best thing that's ever been mine. 💌"
+];
+
+const countdownContainer = document.getElementById('countdown-container');
+if (countdownContainer) {
+    countdownContainer.addEventListener('click', () => {
+        const quoteElement = countdownContainer.querySelector('p');
+        if (quoteElement) {
+            quoteElement.style.opacity = 0;
+            setTimeout(() => {
+                quoteElement.innerText = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+                quoteElement.style.opacity = 1;
+            }, 300);
+        }
+    });
+}
+
+// Secret Love Letter Modal Logic
+const modal = document.getElementById("love-letter-modal");
+const btn = document.getElementById("envelope-trigger");
+const span = document.getElementsByClassName("close-modal")[0];
+const letterText = "My Dearest Aashish,\n\nIf you are reading this, it means you said Yes! (As if you had a choice 😉).\nI just wanted to take a moment to tell you how incredibly lucky I am to have you in my life.\n\nHappy Valentine's Day! ❤️\n\nLove,\nAbhinav";
+
+let typingTimeout;
+
+function typeWriter(text, elementId, speed = 50) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    element.innerHTML = '';
+    let i = 0;
+    
+    // Clear any existing timeout to prevent overlaps
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    function type() {
+        if (i < text.length) {
+            if (text.charAt(i) === '\n') {
+                element.innerHTML += '<br>';
+            } else {
+                element.innerHTML += text.charAt(i);
+            }
+            i++;
+            typingTimeout = setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+if (btn) {
+    btn.onclick = function() {
+        modal.style.display = "block";
+        typeWriter(letterText, 'love-letter-text', 50);
+    }
+}
+
+if (span) {
+    span.onclick = function() {
+        modal.style.display = "none";
+        if (typingTimeout) clearTimeout(typingTimeout);
+    }
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        if (typingTimeout) clearTimeout(typingTimeout);
+    }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hey Aashish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/style.css" />
+    <style>
+      .cursor-heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center/contain;
+        pointer-events: none;
+        animation: floatUp 1s ease-out forwards;
+        z-index: 9999;
+      }
+      @keyframes floatUp {
+        0% { opacity: 1; transform: scale(1) translateY(0); }
+        100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add the audio element here -->
+    <audio id="background-music" loop>
+      <source src="./public/song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="move-sound" preload="auto">
+      <source src="./public/swish.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="carousel-belt left-belt">
+        <div class="belt-track">
+            <img src="./public/images/photo1.jpg" alt="photo">
+            <img src="./public/images/photo2.jpg" alt="photo">
+            <img src="./public/images/photo3.jpg" alt="photo">
+            <img src="./public/images/photo4.jpg" alt="photo">
+            <img src="./public/images/photo5.jpg" alt="photo">
+            <img src="./public/images/photo6.jpg" alt="photo">
+            <img src="./public/images/photo7.jpg" alt="photo">
+            <img src="./public/images/photo8.jpg" alt="photo">
+            <img src="./public/images/photo9.jpg" alt="photo">
+            <img src="./public/images/photo10.jpg" alt="photo">
+            <!-- Duplicates for seamless loop -->
+            <img src="./public/images/photo1.jpg" alt="photo">
+            <img src="./public/images/photo2.jpg" alt="photo">
+            <img src="./public/images/photo3.jpg" alt="photo">
+            <img src="./public/images/photo4.jpg" alt="photo">
+            <img src="./public/images/photo5.jpg" alt="photo">
+            <img src="./public/images/photo6.jpg" alt="photo">
+            <img src="./public/images/photo7.jpg" alt="photo">
+            <img src="./public/images/photo8.jpg" alt="photo">
+            <img src="./public/images/photo9.jpg" alt="photo">
+            <img src="./public/images/photo10.jpg" alt="photo">
+        </div>
+    </div>
+
+    <div class="carousel-belt right-belt">
+        <div class="belt-track">
+            <img src="./public/images/photo1.jpg" alt="photo">
+            <img src="./public/images/photo2.jpg" alt="photo">
+            <img src="./public/images/photo3.jpg" alt="photo">
+            <img src="./public/images/photo4.jpg" alt="photo">
+            <img src="./public/images/photo5.jpg" alt="photo">
+            <img src="./public/images/photo6.jpg" alt="photo">
+            <img src="./public/images/photo7.jpg" alt="photo">
+            <img src="./public/images/photo8.jpg" alt="photo">
+            <img src="./public/images/photo9.jpg" alt="photo">
+            <img src="./public/images/photo10.jpg" alt="photo">
+            <!-- Duplicates for seamless loop -->
+            <img src="./public/images/photo1.jpg" alt="photo">
+            <img src="./public/images/photo2.jpg" alt="photo">
+            <img src="./public/images/photo3.jpg" alt="photo">
+            <img src="./public/images/photo4.jpg" alt="photo">
+            <img src="./public/images/photo5.jpg" alt="photo">
+            <img src="./public/images/photo6.jpg" alt="photo">
+            <img src="./public/images/photo7.jpg" alt="photo">
+            <img src="./public/images/photo8.jpg" alt="photo">
+            <img src="./public/images/photo9.jpg" alt="photo">
+            <img src="./public/images/photo10.jpg" alt="photo">
+        </div>
+    </div>
+
+    <div class="container">
+      <div id="countdown-container">
+        <p>Countdown to Valentine's Day 💘</p>
+        <div id="timer">Loading...</div>
+      </div>
+      <div class="banner-gif">
+        <img id="banner" src="./public/images/mid.gif" alt="banner" />
+      </div>
+      <h1 id="question-heading">Aashish, I know I married you… but just to be sure—
+will you be my Valentine?</h1>
+      <div class="buttons">
+        <button id="yes-button"><p>Yes</p></button>
+        <button id="no-button"><p>No</p></button>
+      </div>
+      <div class="message">
+        <h2 id="success-message">Good choice, darling.
+Because 'no' was never an option.💖💖😏💖💖</h2>
+        <button id="reset-button">Play Again 🔄</button>
+        
+        <h6>Creator: <a class="creator" href="https://github.com/abhinavgupta104">ABHINAV  ;)</a></h6>
+        <div id="envelope-trigger" class="floating-envelope">💌</div>
+      </div>
+      <div class="language-selector">
+        <label for="language-select">Choose Language:</label>
+        <select id="language-select" onchange="changeLanguage()">
+          <option value="english">English</option>
+          <option value="french">French</option>
+          <option value="thai">แบบไทย</option>
+        </select>
+      </div>
+    </div>
+    <div class="floating-hearts">
+        <span>❤</span>
+        <span>💖</span>
+        <span>❤</span>
+        <span>💗</span>
+        <span>❤</span>
+        <span>💖</span>
+        <span>❤</span>
+        <span>💗</span>
+        <span>❤</span>
+        <span>💖</span>
+        <span>❤</span>
+        <span>💗</span>
+        <span>❤</span>
+        <span>💖</span>
+        <span>❤</span>
+    </div>
+
+    <!-- Secret Love Letter Modal -->
+    <div id="love-letter-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>My Secret Letter 💌</h2>
+        <p id="love-letter-text" style="line-height: 1.6; font-size: 1.1rem;"></p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="./public/js/script.js"></script>
+    <script>
+      let moveCounter = 0;
+      document.addEventListener('mousemove', function(e) {
+        moveCounter++;
+        if (moveCounter % 4 !== 0) return; // Throttling to avoid too many elements
+        const heart = document.createElement('div');
+        heart.className = 'cursor-heart';
+        heart.style.left = (e.pageX - 10) + 'px';
+        heart.style.top = (e.pageY - 10) + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      });
+    </script>
+  </body>
+</html>
