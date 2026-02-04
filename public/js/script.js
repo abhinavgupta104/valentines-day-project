@@ -66,13 +66,13 @@ let size = 50;
 let clicks = 0;
 
 // Get the audio element
-const music = document.getElementById('background-music');
+let music = document.getElementById('background-music');
 
 no_button.addEventListener('click', () => {
     // Change banner source
     let banner = document.getElementById('banner');
     if (clicks === 0) {
-        banner.src = "./public/images/no.gif";
+        banner.src = "images/no.gif";
         refreshBanner();
     }
     clicks++;
@@ -97,9 +97,11 @@ no_button.addEventListener('click', () => {
         size = 50;
     }
         // Play the music when they say NO! 🎵
-    music.play().catch(error => {
-        console.log('Could not play music:', error);
-    });
+    if (music) {
+        music.play().catch(error => {
+            console.log('Could not play music:', error);
+        });
+    }
 });
 
 yes_button.addEventListener('click', () => {
@@ -126,9 +128,11 @@ yes_button.addEventListener('click', () => {
     }
 
     // Play the music when they say YES! 🎵
-    music.play().catch(error => {
-        console.log('Could not play music:', error);
-    });
+    if (music) {
+        music.play().catch(error => {
+            console.log('Could not play music:', error);
+        });
+    }
 });
 
 const moveButton = (e) => {
@@ -210,7 +214,7 @@ const moveButton = (e) => {
     targetX = Math.min(Math.max(margin, targetX || 0), maxX);
     targetY = Math.min(Math.max(margin, targetY || 0), maxY);
 
-    no_button.style.position = "absolute";
+    no_button.style.position = "fixed";
     no_button.style.left = targetX + "px";
     no_button.style.top = targetY + "px";
 
@@ -342,12 +346,16 @@ document.addEventListener('touchmove', (e) => {
     }, 1000);
 });
 
-// Ensure music plays on mobile interaction (tap anywhere)
-document.body.addEventListener('touchstart', function() {
-    if (music.paused) {
-        music.play().catch(() => {});
+// Ensure music plays on interaction (tap or click anywhere)
+const playMusic = () => {
+    if (music && music.paused) {
+        music.play().catch((e) => {
+            console.log("Audio play failed (waiting for interaction):", e);
+        });
     }
-}, { once: true });
+};
+document.body.addEventListener('touchstart', playMusic);
+document.body.addEventListener('click', playMusic);
 
 // Change page title when user switches tabs
 let originalTitle = document.title;
@@ -406,6 +414,16 @@ function updateCountdown() {
 
 // Ensure DOM is ready before starting countdown
 document.addEventListener('DOMContentLoaded', () => {
+    music = document.getElementById('background-music');
+    
+    // Debugging: Check if audio file loads
+    if (music) {
+        music.addEventListener('error', (e) => {
+            console.error("Error loading audio:", music.error);
+            alert("Music failed to load! Please check if 'song.mp3' is inside the 'public' folder.");
+        });
+    }
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
@@ -485,7 +503,7 @@ if (span) {
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (modal && event.target == modal) {
         modal.style.display = "none";
         if (typingTimeout) clearTimeout(typingTimeout);
     }
