@@ -148,15 +148,27 @@ Because 'no' was never an option.💖💖😏💖💖</h2>
     <script src="./public/js/script.js"></script>
     <script>
       let moveCounter = 0;
+      
+      const createHeart = (x, y) => {
+        const heart = document.createElement('div');
+        heart.className = 'cursor-heart';
+        heart.style.left = (x - 10) + 'px';
+        heart.style.top = (y - 10) + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      };
+
       document.addEventListener('mousemove', function(e) {
         moveCounter++;
         if (moveCounter % 4 !== 0) return; // Throttling to avoid too many elements
-        const heart = document.createElement('div');
-        heart.className = 'cursor-heart';
-        heart.style.left = (e.pageX - 10) + 'px';
-        heart.style.top = (e.pageY - 10) + 'px';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
+        createHeart(e.pageX, e.pageY);
+      });
+
+      document.addEventListener('touchmove', function(e) {
+        moveCounter++;
+        if (moveCounter % 4 !== 0) return;
+        const touch = e.touches[0];
+        createHeart(touch.pageX, touch.pageY);
       });
     </script>
   </body>

@@ -105,11 +105,13 @@ no_button.addEventListener('click', () => {
 yes_button.addEventListener('click', () => {
     // change banner gif path
     let banner = document.getElementById('banner');
-    banner.src = "./public/images/yes.gif";
+    banner.src = "./public/images/mid.gif";
     refreshBanner();
     // hide buttons div
     let buttons = document.getElementsByClassName('buttons')[0];
     buttons.style.display = "none";
+    // hide question heading
+    document.getElementById('question-heading').style.display = "none";
     // show message div
     let message = document.getElementsByClassName('message')[0];
     message.style.display = "block";
@@ -402,8 +404,10 @@ function updateCountdown() {
     timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// Ensure DOM is ready before starting countdown
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
 // Love Quotes Feature
 const loveQuotes = [
@@ -430,6 +434,7 @@ if (countdownContainer) {
         }
     });
 }
+});
 
 // Secret Love Letter Modal Logic
 const modal = document.getElementById("love-letter-modal");
@@ -443,17 +448,20 @@ function typeWriter(text, elementId, speed = 50) {
     const element = document.getElementById(elementId);
     if (!element) return;
     element.innerHTML = '';
+    
+    // Use spread operator to handle emojis correctly
+    const chars = [...text];
     let i = 0;
     
     // Clear any existing timeout to prevent overlaps
     if (typingTimeout) clearTimeout(typingTimeout);
 
     function type() {
-        if (i < text.length) {
-            if (text.charAt(i) === '\n') {
+        if (i < chars.length) {
+            if (chars[i] === '\n') {
                 element.innerHTML += '<br>';
             } else {
-                element.innerHTML += text.charAt(i);
+                element.innerHTML += chars[i];
             }
             i++;
             typingTimeout = setTimeout(type, speed);
