@@ -3,96 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hey Aashish</title>
+    <title>Import Question</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./public/css/style.css" />
-    <style>
-      .cursor-heart {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center/contain;
-        pointer-events: none;
-        animation: floatUp 1s ease-out forwards;
-        z-index: 9999;
-      }
-      @keyframes floatUp {
-        0% { opacity: 1; transform: scale(1) translateY(0); }
-        100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Add the audio element here -->
+    <!-- Background Music -->
     <audio id="background-music" loop>
-      <source src="./public/song.mp3" type="audio/mpeg">
+      <source src="song.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <audio id="move-sound" preload="auto">
-      <source src="./public/swish.mp3" type="audio/mpeg">
+
+    <!-- Movement Sound Effect (optional) -->
+    <audio id="move-sound">
+      <source src="whoosh.mp3" type="audio/mpeg">
     </audio>
 
     <div class="carousel-belt left-belt">
         <div class="belt-track">
-            <img src="./public/images/photo1.jpg" alt="photo">
-            <img src="./public/images/photo2.jpg" alt="photo">
-            <img src="./public/images/photo3.jpg" alt="photo">
-            <img src="./public/images/photo4.jpg" alt="photo">
-            <img src="./public/images/photo5.jpg" alt="photo">
-            <img src="./public/images/photo6.jpg" alt="photo">
-            <img src="./public/images/photo7.jpg" alt="photo">
-            <img src="./public/images/photo8.jpg" alt="photo">
-            <img src="./public/images/photo9.jpg" alt="photo">
-            <img src="./public/images/photo10.jpg" alt="photo">
-            <!-- Duplicates for seamless loop -->
-            <img src="./public/images/photo1.jpg" alt="photo">
-            <img src="./public/images/photo2.jpg" alt="photo">
-            <img src="./public/images/photo3.jpg" alt="photo">
-            <img src="./public/images/photo4.jpg" alt="photo">
-            <img src="./public/images/photo5.jpg" alt="photo">
-            <img src="./public/images/photo6.jpg" alt="photo">
-            <img src="./public/images/photo7.jpg" alt="photo">
-            <img src="./public/images/photo8.jpg" alt="photo">
-            <img src="./public/images/photo9.jpg" alt="photo">
-            <img src="./public/images/photo10.jpg" alt="photo">
+            <img src="images/photo1.jpg" alt="photo">
+            <img src="images/photo2.jpg" alt="photo">
+            <img src="images/photo3.jpg" alt="photo">
+            <img src="images/photo4.jpg" alt="photo">
+            <img src="images/photo5.jpg" alt="photo">
+            <img src="images/photo6.jpg" alt="photo">
+            <img src="images/photo7.jpg" alt="photo">
+            <img src="images/photo8.jpg" alt="photo">
+            <img src="images/photo9.jpg" alt="photo">
+            <img src="images/photo10.jpg" alt="photo">
+            <img src="images/photo1.jpg" alt="photo">
+            <img src="images/photo2.jpg" alt="photo">
+            <img src="images/photo3.jpg" alt="photo">
+            <img src="images/photo4.jpg" alt="photo">
+            <img src="images/photo5.jpg" alt="photo">
+            <img src="images/photo6.jpg" alt="photo">
+            <img src="images/photo7.jpg" alt="photo">
+            <img src="images/photo8.jpg" alt="photo">
+            <img src="images/photo9.jpg" alt="photo">
+            <img src="images/photo10.jpg" alt="photo">
         </div>
     </div>
 
     <div class="carousel-belt right-belt">
         <div class="belt-track">
-            <img src="./public/images/photo1.jpg" alt="photo">
-            <img src="./public/images/photo2.jpg" alt="photo">
-            <img src="./public/images/photo3.jpg" alt="photo">
-            <img src="./public/images/photo4.jpg" alt="photo">
-            <img src="./public/images/photo5.jpg" alt="photo">
-            <img src="./public/images/photo6.jpg" alt="photo">
-            <img src="./public/images/photo7.jpg" alt="photo">
-            <img src="./public/images/photo8.jpg" alt="photo">
-            <img src="./public/images/photo9.jpg" alt="photo">
-            <img src="./public/images/photo10.jpg" alt="photo">
-            <!-- Duplicates for seamless loop -->
-            <img src="./public/images/photo1.jpg" alt="photo">
-            <img src="./public/images/photo2.jpg" alt="photo">
-            <img src="./public/images/photo3.jpg" alt="photo">
-            <img src="./public/images/photo4.jpg" alt="photo">
-            <img src="./public/images/photo5.jpg" alt="photo">
-            <img src="./public/images/photo6.jpg" alt="photo">
-            <img src="./public/images/photo7.jpg" alt="photo">
-            <img src="./public/images/photo8.jpg" alt="photo">
-            <img src="./public/images/photo9.jpg" alt="photo">
-            <img src="./public/images/photo10.jpg" alt="photo">
+            <img src="images/photo1.jpg" alt="photo">
+            <img src="images/photo2.jpg" alt="photo">
+            <img src="images/photo3.jpg" alt="photo">
+            <img src="images/photo4.jpg" alt="photo">
+            <img src="images/photo5.jpg" alt="photo">
+            <img src="images/photo6.jpg" alt="photo">
+            <img src="images/photo7.jpg" alt="photo">
+            <img src="images/photo8.jpg" alt="photo">
+            <img src="images/photo9.jpg" alt="photo">
+            <img src="images/photo10.jpg" alt="photo">
+            <img src="images/photo1.jpg" alt="photo">
+            <img src="images/photo2.jpg" alt="photo">
+            <img src="images/photo3.jpg" alt="photo">
+            <img src="images/photo4.jpg" alt="photo">
+            <img src="images/photo5.jpg" alt="photo">
+            <img src="images/photo6.jpg" alt="photo">
+            <img src="images/photo7.jpg" alt="photo">
+            <img src="images/photo8.jpg" alt="photo">
+            <img src="images/photo9.jpg" alt="photo">
+            <img src="images/photo10.jpg" alt="photo">
         </div>
     </div>
 
     <div class="container">
-      <div id="countdown-container">
-        <p>Countdown to Valentine's Day 💘</p>
-        <div id="timer">Loading...</div>
-      </div>
       <div class="banner-gif">
-        <img id="banner" src="./public/images/mid.gif" alt="banner" />
+        <img id="banner" src="images/mid.gif" alt="banner" />
       </div>
       <h1 id="question-heading">Aashish, I know I married you… but just to be sure—
 will you be my Valentine?</h1>
@@ -103,10 +84,8 @@ will you be my Valentine?</h1>
       <div class="message">
         <h2 id="success-message">Good choice, darling.
 Because 'no' was never an option.💖💖😏💖💖</h2>
-        <button id="reset-button">Play Again 🔄</button>
         
         <h6>Creator: <a class="creator" href="https://github.com/abhinavgupta104">ABHINAV  ;)</a></h6>
-        <div id="envelope-trigger" class="floating-envelope">💌</div>
       </div>
       <div class="language-selector">
         <label for="language-select">Choose Language:</label>
@@ -116,7 +95,29 @@ Because 'no' was never an option.💖💖😏💖💖</h2>
           <option value="thai">แบบไทย</option>
         </select>
       </div>
+      
+      <!-- Countdown Container for Love Quotes -->
+      <div id="countdown-container" style="margin-top: 30px; cursor: pointer; text-align: center; background: linear-gradient(135deg, #ffe0f0 0%, #fff5f7 100%); padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(255, 64, 129, 0.2);">
+        <h3 style="color: #d81b60; font-family: 'Pacifico', cursive;">💝 Valentine's Day Countdown 💝</h3>
+        <div id="timer" style="font-size: 28px; font-weight: bold; color: #ff4081; margin: 15px 0;"></div>
+        <p style="margin-top: 15px; font-style: italic; transition: opacity 0.3s; color: #666;">Click me for love quotes! 💕</p>
+      </div>
+      
+      <!-- Envelope/Love Letter Trigger Button -->
+      <button id="envelope-trigger" style="margin-top: 25px; padding: 15px 30px; font-size: 18px; background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%); color: white; border: none; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Nunito', sans-serif; font-weight: 700;">
+        📩 Open Love Letter
+      </button>
     </div>
+    
+    <!-- Love Letter Modal -->
+    <div id="love-letter-modal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);">
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffeef8 0%, #fff5f7 100%); margin: 5% auto; padding: 40px; border: 2px solid #ff4081; width: 80%; max-width: 600px; border-radius: 20px; box-shadow: 0 10px 40px rgba(255, 64, 129, 0.3); position: relative; animation: slideIn 0.5s;">
+        <span class="close-modal" style="color: #ff4081; position: absolute; right: 20px; top: 15px; font-size: 35px; font-weight: bold; cursor: pointer; line-height: 20px; transition: color 0.2s;">&times;</span>
+        <h2 style="color: #d81b60; font-family: 'Pacifico', cursive; text-align: center; margin-bottom: 25px; font-size: 28px;">💌 A Love Letter For You 💌</h2>
+        <div id="love-letter-text" style="font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.8; color: #333; white-space: pre-wrap; min-height: 200px; padding: 20px; background: white; border-radius: 10px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);"></div>
+      </div>
+    </div>
+    
     <div class="floating-hearts">
         <span>❤</span>
         <span>💖</span>
@@ -134,42 +135,30 @@ Because 'no' was never an option.💖💖😏💖💖</h2>
         <span>💖</span>
         <span>❤</span>
     </div>
-
-    <!-- Secret Love Letter Modal -->
-    <div id="love-letter-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>My Secret Letter 💌</h2>
-        <p id="love-letter-text" style="line-height: 1.6; font-size: 1.1rem;"></p>
-      </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <script src="./public/js/script.js"></script>
-    <script>
-      let moveCounter = 0;
+    
+    <style>
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
       
-      const createHeart = (x, y) => {
-        const heart = document.createElement('div');
-        heart.className = 'cursor-heart';
-        heart.style.left = (x - 10) + 'px';
-        heart.style.top = (y - 10) + 'px';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
-      };
-
-      document.addEventListener('mousemove', function(e) {
-        moveCounter++;
-        if (moveCounter % 4 !== 0) return; // Throttling to avoid too many elements
-        createHeart(e.pageX, e.pageY);
-      });
-
-      document.addEventListener('touchmove', function(e) {
-        moveCounter++;
-        if (moveCounter % 4 !== 0) return;
-        const touch = e.touches[0];
-        createHeart(touch.pageX, touch.pageY);
-      });
-    </script>
+      #envelope-trigger:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6);
+      }
+      
+      .close-modal:hover {
+        color: #c2185b;
+      }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
