@@ -395,12 +395,10 @@ html {
 
 .left-belt {
     left: 30px;
-    display: none;
 }
 
 .right-belt {
     right: 30px;
-    display: none;
 }
 
 .belt-track {
@@ -445,16 +443,6 @@ html {
 @keyframes scrollVertical {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
-}
-
-@media (min-width: 1200px) {
-    .left-belt {
-        display: block;
-    }
-
-    .right-belt {
-        display: block;
-    }
 }
 
 @media (max-width: 768px) {
