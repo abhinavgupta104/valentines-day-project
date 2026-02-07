@@ -2,16 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Import Question</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#ff4081" />
+    <title>Will You Be My Valentine?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <audio id="background-music" loop>
+    <div class="romance-overlay" aria-hidden="true"></div>
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">🌙</button>
+
+    <!-- Music Control Panel -->
+    <div id="music-controls" class="music-controls">
+      <button id="music-play-pause" class="music-btn" title="Play/Pause">▶️</button>
+      <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
+      <span id="volume-label">50%</span>
+    </div>
+
+    <!-- 
+      Music Player
+      To use your own music: 
+      1. Place your music file (song.mp3) in the public folder
+      2. Or change the src below to your own file path/URL
+    -->
+    <audio id="background-music" loop preload="auto">
       <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Optional ambient layer (add ambient.mp3 to public for soft ambience) -->
+    <audio id="ambient-sound" loop preload="auto">
+      <source src="ambient.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
 
@@ -66,32 +93,45 @@
     </div>
 
     <div class="container">
-      <div class="banner-gif">
-        <img id="banner" src="images/mid.gif" alt="banner" />
-      </div>
-      <h1 id="question-heading">Aashish, I know I married you… but just to be sure—
+      <h1 id="question-heading">Aashu, I know I married you… but just to be sure—
 will you be my Valentine?</h1>
       <div class="buttons">
         <button id="yes-button"><p>Yes</p></button>
         <button id="no-button"><p>No</p></button>
       </div>
-      <div class="message">
-       <div class="container">
-      <div class="banner-gif">
-        <img id="banner" src="images/mid.gif" alt="banner" />
+      
+      <div id="score-counter" class="score-counter">
+        <p>No escapes: <span id="no-count">0</span></p>
       </div>
-        <h2 id="success-message">Good choice, darling.
-Because 'no' was never an option.💖💖😏💖💖</h2>
+      
+      <div id="countdown-container">
+        <p id="quote-text">Counting down to Valentine's Day...</p>
+        <div id="timer"></div>
+      </div>
+
+      <div class="message">
+        <div class="banner-gif">
+          <img id="banner" src="images/mid.gif" alt="banner" />
+        </div>
+        <h2 id="success-message">Good choice, darling. Because 'no' was never an option.💖💖😏💖💖</h2>
         
+        <div id="final-score" class="final-score">
+          <p>The "No" button escaped <span id="final-no-count">0</span> times before you said Yes! 😄</p>
+        </div>
+
+        <button id="reset-button">Ask Again</button>
         <h6>Creator: <a class="creator" href="https://github.com/abhinavgupta104">ABHINAV  ;)</a></h6>
       </div>
-      <div class="language-selector">
-        <label for="language-select">Choose Language:</label>
-        <select id="language-select" onchange="changeLanguage()">
-          <option value="english">English</option>
-          <option value="french">French</option>
-          <option value="thai">แบบไทย</option>
-        </select>
+
+    </div>
+
+    <div id="envelope-trigger" class="floating-envelope">💌</div>
+
+    <div id="love-letter-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 style="text-align: center;">💖 Love Letter 💖</h2>
+        <p id="love-letter-text"></p>
       </div>
     </div>
     <div class="floating-hearts">
